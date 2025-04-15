@@ -3,11 +3,14 @@
 </script>
 
 <template>
+
     <header>
-        <h1>IFbooks</h1>
-        <p>
-            Apreço a leitura
-        </p>
+        <div class="logo">
+            <h1>IFbooks</h1>
+            <p>
+                Apreço a leitura
+            </p>
+        </div>
         <input type="text" placeholder="Buscar">
         <nav>
             <ul>
@@ -35,17 +38,17 @@
             <ul>
                 <li>
                     <a href="">
-                        <p></p>
+                        <i class="fa-solid fa-cart-shopping"></i>
                     </a>
                 </li>
                 <li>
                     <a href="">
-                        <p></p>
+
                     </a>
                 </li>
                 <li>
                     <a href="">
-                        <p></p>
+
                     </a>
                 </li>
             </ul>
@@ -53,4 +56,38 @@
     </header>
 </template>
 
-<style scoped></style>
+<style scoped>
+header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #27AE60;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo h1 {
+    border-right: 1px solid #27AE60;
+    color: #231F2D;
+}
+
+.logo p {
+    color: #27AE60;
+}
+
+ul {
+    display: flex;
+}
+
+ul li {
+    list-style: none;
+}
+
+ul li a p {
+    color: gray;
+    text-decoration: none;
+}
+</style>
