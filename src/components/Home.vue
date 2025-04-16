@@ -90,6 +90,7 @@ section.lancamentos {
   margin: 4vw 2vw;
 }
 section.lancamentos h2 {
+  margin: 4vw;
   font-size: 40px;
   font-weight: 300;
 }
@@ -103,6 +104,7 @@ section.lancamentos ul li {
   width: 25%;
   list-style: none;
   margin: 2vw 0;
+  padding: 0;
   font-size: 130%;
 }
 section.lancamentos ul li p{
@@ -115,12 +117,15 @@ section.lancamentos ul li div.info p{
     font-size: 130%;
 }
 section.lancamentos ul li button{
-    width: 64%;
+    width: 50%;
     background: #27AE60;
     color: #fff;
     padding: 10px 0;
     border-radius: 2px;
     border: none;
     font-size: 120%;
+}
+section.lancamentos ul li button:hover{
+  background: #27AE60;
 }
 </style>
