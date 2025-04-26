@@ -1,5 +1,8 @@
 <script setup>
-  import { ref } from 'vue';
+//imports
+import { ref } from 'vue';
+
+//produtos - home
 const produtos = ref([
   {
     id: 1,
@@ -57,7 +60,25 @@ const produtos = ref([
     preco: 15.81,
     capa: "/src/assets/imgs/booklovers.png"
   },
-])
+]);
+const carrinho = ref([
+{
+    id: 1,
+    titulo: 'Chain of Iron: Volume 2',
+    autor: 'Cassandra Clare',
+    preco: 23.24,
+    capa:"/src/assets/imgs/chainofironv2.png",
+    quantidade: 1
+  },
+  {
+    id: 2,
+    titulo: 'Chain of Thorns',
+    autor: 'Cassandra Clare',
+    preco: 23.24,
+    capa:"/src/assets/imgs/chainofthorns.png",
+    quantidade: 1
+  },
+]);
 </script>
 <template>
   <header>
@@ -199,6 +220,36 @@ const produtos = ref([
       </ul>
     </section>
   </div>
+  <section class="carrinho">
+        <h1>Carrinho</h1>
+        <div class="topo">
+            <h2>Título</h2>
+            <h2>Quantidade</h2>
+            <h2>Subtotal</h2>
+        </div>
+        <div class="corpo">
+            <ul>
+                <li v-for="(item, index) of carrinho">
+                    <div class="produto">
+                        <img :src="item.capa" :alt="item.titulo">
+                        <div>
+                            <h3>{{ item.titulo }}</h3>
+                            <p>{{ item.autor }}</p>
+                            <span>{{ item.preco }}</span>
+                        </div>
+                    </div>
+                    <div class="quantidade">
+                        <button @click="() => {item.quantidade--}">-</button>
+                        <p>{{ item.quantidade }}</p>
+                        <button @click="() => {item.quantidade++}">+</button>
+                    </div>
+                    <div class="subtotal">
+                        <span>R${{ (item.preco * item.quantidade).toFixed(2).replace(".", ",") }}</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+  </section>
   <footer>
     <div class="contatos">
       <div>
@@ -519,6 +570,36 @@ section.lancamentos ul li button {
 
 section.lancamentos ul li button:hover {
   background: #27AE60;
+}
+/*======CARRINHO======= */
+section.carrinho {
+    color: #382C2C;
+    margin: 8vw 6vw 0 6vw;
+}
+section.carrinho h1 {
+    color: #27AE60;
+    font-size: 2.4rem;
+    font-weight: 500;
+    margin-bottom: 3vw;
+}
+section.carrinho .topo {
+    border-bottom: solid 2px #27AE60;
+    display: flex;
+    justify-content: space-between;
+}
+section.carrinho .topo h2{
+    color: #382C2C;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 0 2vw 1vw 2vw;
+}
+section.carrinho .topo h2:nth-child(2){
+    margin-left: 12vw;
+}
+section.carrinho .corpo ul li{
+    display: flex;
+    justify-content: space-between;
+    margin: 0.5vw;
 }
 /*======FOOTER======= */
 svg.contatos {
