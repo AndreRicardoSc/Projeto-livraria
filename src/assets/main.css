@@ -1,4 +1,8 @@
 @import './base.css';
 body{
   background: #fff;
+  color: #000;
+}
+a {
+  text-decoration: none;
 }
