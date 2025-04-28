@@ -1,6 +1,6 @@
 <script setup>
 //imports
-import { ref } from 'vue';
+import { ref } from 'vue'
 
 //produtos - home
 const produtos = ref([
@@ -9,76 +9,101 @@ const produtos = ref([
     titulo: 'Chain of Iron: Volume 2',
     autor: 'Cassandra Clare',
     preco: 23.24,
-    capa: "/src/assets/imgs/chainofironv2.png"
+    capa: '/src/assets/imgs/chainofironv2.png',
+    quantidade: 1,
   },
   {
     id: 2,
     titulo: 'Chain of Thorns',
     autor: 'Cassandra Clare',
     preco: 23.24,
-    capa: "/src/assets/imgs/chainofthorns.png"
+    capa: '/src/assets/imgs/chainofthorns.png',
+    quantidade: 1,
   },
   {
     id: 3,
     titulo: 'City of Fallen',
     autor: 'Cassandra Clare',
     preco: 13.94,
-    capa: "/src/assets/imgs/cityoffallenangels.png"
+    capa: '/src/assets/imgs/cityoffallenangels.png',
+    quantidade: 1,
   },
   {
     id: 4,
     titulo: 'Nona the Ninth',
     autor: 'Cassandra Clare',
     preco: 16.84,
-    capa: "/src/assets/imgs/nonatheninth.png"
+    capa: '/src/assets/imgs/nonatheninth.png',
+    quantidade: 1,
   },
   {
     id: 5,
     titulo: 'Harlem Shuffle',
     autor: 'Colson Whitehead',
     preco: 26.92,
-    capa: "/src/assets/imgs/harlemshuffle.png"
+    capa: '/src/assets/imgs/harlemshuffle.png',
+    quantidade: 1,
   },
   {
     id: 6,
     titulo: 'Two Old Women',
     autor: 'Velma Wallis',
     preco: 13.95,
-    capa: "/src/assets/imgs/twooldwomen.png"
+    capa: '/src/assets/imgs/twooldwomen.png',
+    quantidade: 1,
   },
   {
     id: 7,
     titulo: 'Carrie Soto Is Back',
     autor: 'Taylor Jenkins Reid',
     preco: 26.04,
-    capa: "/src/assets/imgs/carriesotoisback.png"
+    capa: '/src/assets/imgs/carriesotoisback.png',
+    quantidade: 1,
   },
   {
     id: 8,
     titulo: 'Book Lovers',
     autor: 'Emily Henry',
     preco: 15.81,
-    capa: "/src/assets/imgs/booklovers.png"
+    capa: '/src/assets/imgs/booklovers.png',
+    quantidade: 1,
   },
-]);
+])
+
+//lógica do carrinho de compras
 const carrinho = ref([
-{
+  {
     id: 1,
     titulo: 'Chain of Iron: Volume 2',
     autor: 'Cassandra Clare',
     preco: 23.24,
-    capa:"/src/assets/imgs/chainofironv2.png",
-    quantidade: 1
+    capa: '/src/assets/imgs/chainofironv2.png',
+    quantidade: 1,
   },
   {
     id: 2,
     titulo: 'Chain of Thorns',
     autor: 'Cassandra Clare',
     preco: 23.24,
-    capa:"/src/assets/imgs/chainofthorns.png",
-    quantidade: 1
+    capa: '/src/assets/imgs/chainofthorns.png',
+    quantidade: 1,
   },
-]);
+])
+const adicionarAoCarrinho = (index, id) => {
+  let contemNoCarrinho = 0
+  for (let elem of carrinho.value) {
+    if (elem.id == id) {
+      contemNoCarrinho++
+      elem.quantidade++
+    }
+  }
+  if (contemNoCarrinho == 0) {
+    carrinho.value.push(produtos.value[index])
+  }
+}
+const removerDoCarrinho = (index) => {
+  carrinho.value.splice(index, 1)
+}
 </script>
 <template>
   <header>
@@ -164,37 +189,50 @@ const carrinho = ref([
         <span>Autor de Abril</span>
         <h1>Eric-Emanuel Schmitt</h1>
         <p>
-          Eric-Emmanuel Schmitt has been awarded more than 20 literary prizes and distinctions, and in 2001 he received
-          the title of Chevalier des Arts et des Lettres. His books have been translated into over 40 languages.
+          Eric-Emmanuel Schmitt has been awarded more than 20 literary prizes and distinctions, and
+          in 2001 he received the title of Chevalier des Arts et des Lettres. His books have been
+          translated into over 40 languages.
         </p>
         <a href="">
           <p>Acessar página do livro</p>
         </a>
       </div>
       <div>
-        <img src="/src/assets/imgs/Schmitt_Nocognia_3D_500pcx 1.png" alt="livro">
+        <img src="/src/assets/imgs/Schmitt_Nocognia_3D_500pcx 1.png" alt="livro" />
         <p>*within the stock limit</p>
       </div>
     </section>
     <section class="servicos">
       <ul>
         <li>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.<path d="M48 0C21.5 0 0 21.5 0 48L0 368c0 26.5 21.5 48 48 48l16 0c0 53 43 96 96 96s96-43 96-96l128 0c0 53 43 96 96 96s96-43 96-96l32 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l0-64 0-32 0-18.7c0-17-6.7-33.3-18.7-45.3L512 114.7c-12-12-28.3-18.7-45.3-18.7L416 96l0-48c0-26.5-21.5-48-48-48L48 0zM416 160l50.7 0L544 237.3l0 18.7-128 0 0-96zM112 416a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm368-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg>
-          <p>
-            Frete grátis para SC
-          </p>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+            !Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License -
+            https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.
+            <path
+              d="M48 0C21.5 0 0 21.5 0 48L0 368c0 26.5 21.5 48 48 48l16 0c0 53 43 96 96 96s96-43 96-96l128 0c0 53 43 96 96 96s96-43 96-96l32 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l0-64 0-32 0-18.7c0-17-6.7-33.3-18.7-45.3L512 114.7c-12-12-28.3-18.7-45.3-18.7L416 96l0-48c0-26.5-21.5-48-48-48L48 0zM416 160l50.7 0L544 237.3l0 18.7-128 0 0-96zM112 416a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm368-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"
+            />
+          </svg>
+          <p>Frete grátis para SC</p>
         </li>
         <li class="center">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.<path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/></svg>
-          <p>
-            Livros recomendados
-          </p>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+            !Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License -
+            https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.
+            <path
+              d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
+            />
+          </svg>
+          <p>Livros recomendados</p>
         </li>
         <li>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.<path d="M249.6 471.5c10.8 3.8 22.4-4.1 22.4-15.5l0-377.4c0-4.2-1.6-8.4-5-11C247.4 52 202.4 32 144 32C93.5 32 46.3 45.3 18.1 56.1C6.8 60.5 0 71.7 0 83.8L0 454.1c0 11.9 12.8 20.2 24.1 16.5C55.6 460.1 105.5 448 144 448c33.9 0 79 14 105.6 23.5zm76.8 0C353 462 398.1 448 432 448c38.5 0 88.4 12.1 119.9 22.6c11.3 3.8 24.1-4.6 24.1-16.5l0-370.3c0-12.1-6.8-23.3-18.1-27.6C529.7 45.3 482.5 32 432 32c-58.4 0-103.4 20-123 35.6c-3.3 2.6-5 6.8-5 11L304 456c0 11.4 11.7 19.3 22.4 15.5z"/></svg>
-          <p>
-            Mais vendidos
-          </p>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+            !Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License -
+            https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.
+            <path
+              d="M249.6 471.5c10.8 3.8 22.4-4.1 22.4-15.5l0-377.4c0-4.2-1.6-8.4-5-11C247.4 52 202.4 32 144 32C93.5 32 46.3 45.3 18.1 56.1C6.8 60.5 0 71.7 0 83.8L0 454.1c0 11.9 12.8 20.2 24.1 16.5C55.6 460.1 105.5 448 144 448c33.9 0 79 14 105.6 23.5zm76.8 0C353 462 398.1 448 432 448c38.5 0 88.4 12.1 119.9 22.6c11.3 3.8 24.1-4.6 24.1-16.5l0-370.3c0-12.1-6.8-23.3-18.1-27.6C529.7 45.3 482.5 32 432 32c-58.4 0-103.4 20-123 35.6c-3.3 2.6-5 6.8-5 11L304 456c0 11.4 11.7 19.3 22.4 15.5z"
+            />
+          </svg>
+          <p>Mais vendidos</p>
         </li>
       </ul>
     </section>
@@ -208,11 +246,13 @@ const carrinho = ref([
           <div class="info">
             <p>R${{ item.preco }}</p>
           </div>
-          <button>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">!Font Awesome Free 6.7.2 by @fontawesome -
-              https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.
+          <button @click="adicionarAoCarrinho(index, item.id)">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+              !Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License -
+              https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.
               <path
-                d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
+                d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"
+              />
             </svg>
             Comprar
           </button>
@@ -221,34 +261,52 @@ const carrinho = ref([
     </section>
   </div>
   <section class="carrinho">
-        <h1>Carrinho</h1>
-        <div class="topo">
-            <h2>Título</h2>
-            <h2>Quantidade</h2>
-            <h2>Subtotal</h2>
-        </div>
-        <div class="corpo">
-            <ul>
-                <li v-for="(item, index) of carrinho">
-                    <div class="produto">
-                        <img :src="item.capa" :alt="item.titulo">
-                        <div>
-                            <h3>{{ item.titulo }}</h3>
-                            <p>{{ item.autor }}</p>
-                            <span>{{ item.preco }}</span>
-                        </div>
-                    </div>
-                    <div class="quantidade">
-                        <button @click="() => {item.quantidade--}">-</button>
-                        <p>{{ item.quantidade }}</p>
-                        <button @click="() => {item.quantidade++}">+</button>
-                    </div>
-                    <div class="subtotal">
-                        <span>R${{ (item.preco * item.quantidade).toFixed(2).replace(".", ",") }}</span>
-                    </div>
-                </li>
-            </ul>
-        </div>
+    <h1>Carrinho</h1>
+    <div class="topo">
+      <h2>Título</h2>
+      <h2>Quantidade</h2>
+      <h2>Subtotal</h2>
+    </div>
+    <div class="corpo">
+      <ul>
+        <li v-for="(item, index) of carrinho">
+          <div class="produto">
+            <img :src="item.capa" :alt="item.titulo" />
+            <div>
+              <h3>{{ item.titulo }}</h3>
+              <p>{{ item.autor }}</p>
+              <span>{{ item.preco }}</span>
+            </div>
+          </div>
+          <div class="quantidade">
+            <button
+              @click="
+                () => {
+                  item.quantidade--
+                  if(item.quantidade == 0){
+                    removerDoCarrinho(index);
+                  }
+                }"
+            >
+              -
+            </button>
+            <p>{{ item.quantidade }}</p>
+            <button
+              @click="
+                () => {
+                  item.quantidade++
+                }
+              "
+            >
+              +
+            </button>
+          </div>
+          <div class="subtotal">
+            <span>R${{ (item.preco * item.quantidade).toFixed(2).replace('.', ',') }}</span>
+          </div>
+        </li>
+      </ul>
+    </div>
   </section>
   <footer>
     <div class="contatos">
@@ -440,21 +498,21 @@ section.destaques div:nth-child(1) {
 }
 
 section.destaques div:nth-child(1) span {
-  border: solid 1px #27AE60;
+  border: solid 1px #27ae60;
   border-radius: 2px;
   padding: 10px 7px;
-  color: #27AE60;
+  color: #27ae60;
 }
 
 section.destaques div:nth-child(1) h1 {
   font-size: 3.8rem;
   margin: 1.8vw 0;
   font-weight: 700;
-  color: #382C2C;
+  color: #382c2c;
 }
 
 section.destaques div:nth-child(1) p {
-  color: #4D4C4C;
+  color: #4d4c4c;
   margin: 0 12.5vw 0 0;
 }
 
@@ -464,7 +522,7 @@ section.destaques div:nth-child(1) a {
 
 section.destaques div:nth-child(1) a p {
   margin-top: 1.8vw;
-  background-color: #27AE60;
+  background-color: #27ae60;
   border-radius: 2px;
   color: white;
   width: 35%;
@@ -477,39 +535,41 @@ section.destaques div:nth-child(2) p {
   margin-top: -3vw;
 }
 
-ul, ol, li{
+ul,
+ol,
+li {
   list-style: none;
 }
 button {
   cursor: pointer;
 }
 /*--------SERVIÇOS------------*/
-section.servicos{
+section.servicos {
   padding: 6vw 4vw;
-  border-top: #27AE60 solid 1px;
-  border-bottom: #27AE60 solid 1px;
+  border-top: #27ae60 solid 1px;
+  border-bottom: #27ae60 solid 1px;
 }
-section.servicos ul{
+section.servicos ul {
   display: flex;
   align-items: center;
   justify-content: space-around;
 }
-section.servicos ul li{
+section.servicos ul li {
   display: flex;
   align-items: center;
   height: 100px;
   padding: 0 3vw;
 }
-section.servicos ul li.center{
-  border-right: #937DC2 1px solid;
-  border-left: #937DC2 1px solid;
+section.servicos ul li.center {
+  border-right: #937dc2 1px solid;
+  border-left: #937dc2 1px solid;
 }
-section.servicos ul li svg{
-  fill: #382C2C;
+section.servicos ul li svg {
+  fill: #382c2c;
   width: 50px;
   margin-right: 2vw;
 }
-section.servicos ul li p{
+section.servicos ul li p {
   font-size: 170%;
   font-weight: 600;
 }
@@ -547,7 +607,7 @@ section.lancamentos ul li p {
 }
 
 section.lancamentos ul li p.autor {
-  color: #4F4C57;
+  color: #4f4c57;
 }
 
 section.lancamentos ul li div.info p {
@@ -560,7 +620,7 @@ section.lancamentos ul li div.button {
 
 section.lancamentos ul li button {
   width: 100%;
-  background: #27AE60;
+  background: #27ae60;
   color: #fff;
   padding: 10px 0;
   border-radius: 2px;
@@ -569,37 +629,37 @@ section.lancamentos ul li button {
 }
 
 section.lancamentos ul li button:hover {
-  background: #27AE60;
+  background: #27ae60;
 }
 /*======CARRINHO======= */
 section.carrinho {
-    color: #382C2C;
-    margin: 8vw 6vw 0 6vw;
+  color: #382c2c;
+  margin: 8vw 6vw 0 6vw;
 }
 section.carrinho h1 {
-    color: #27AE60;
-    font-size: 2.4rem;
-    font-weight: 500;
-    margin-bottom: 3vw;
+  color: #27ae60;
+  font-size: 2.4rem;
+  font-weight: 500;
+  margin-bottom: 3vw;
 }
 section.carrinho .topo {
-    border-bottom: solid 2px #27AE60;
-    display: flex;
-    justify-content: space-between;
+  border-bottom: solid 2px #27ae60;
+  display: flex;
+  justify-content: space-between;
 }
-section.carrinho .topo h2{
-    color: #382C2C;
-    font-size: 1.5rem;
-    font-weight: 500;
-    margin: 0 2vw 1vw 2vw;
+section.carrinho .topo h2 {
+  color: #382c2c;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 0 2vw 1vw 2vw;
 }
-section.carrinho .topo h2:nth-child(2){
-    margin-left: 12vw;
+section.carrinho .topo h2:nth-child(2) {
+  margin-left: 12vw;
 }
-section.carrinho .corpo ul li{
-    display: flex;
-    justify-content: space-between;
-    margin: 0.5vw;
+section.carrinho .corpo ul li {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5vw;
 }
 /*======FOOTER======= */
 svg.contatos {
