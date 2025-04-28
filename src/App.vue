@@ -1,6 +1,6 @@
 <script setup>
 //imports
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 //produtos - home
 const produtos = ref([
@@ -71,24 +71,8 @@ const produtos = ref([
 ])
 
 //lógica do carrinho de compras
-const carrinho = ref([
-  {
-    id: 1,
-    titulo: 'Chain of Iron: Volume 2',
-    autor: 'Cassandra Clare',
-    preco: 23.24,
-    capa: '/src/assets/imgs/chainofironv2.png',
-    quantidade: 1,
-  },
-  {
-    id: 2,
-    titulo: 'Chain of Thorns',
-    autor: 'Cassandra Clare',
-    preco: 23.24,
-    capa: '/src/assets/imgs/chainofthorns.png',
-    quantidade: 1,
-  },
-])
+const mostraCarrinho = ref(false);
+const carrinho = ref([]);
 const adicionarAoCarrinho = (index, id) => {
   let contemNoCarrinho = 0
   for (let elem of carrinho.value) {
@@ -104,6 +88,13 @@ const adicionarAoCarrinho = (index, id) => {
 const removerDoCarrinho = (index) => {
   carrinho.value.splice(index, 1)
 }
+const precoTotalProdutos = computed(() => {
+  let total = 0;
+  for(let item of carrinho.value){
+    total+= (item.quantidade * item.preco);
+  }
+  return total
+});
 </script>
 <template>
   <header>
@@ -148,7 +139,7 @@ const removerDoCarrinho = (index) => {
       </ul>
       <ul class="icons">
         <li>
-          <a href="" class="border">
+          <a class="border" @click="mostraCarrinho = !mostraCarrinho">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
               !Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License -
               https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.
@@ -159,7 +150,7 @@ const removerDoCarrinho = (index) => {
           </a>
         </li>
         <li>
-          <a href="" class="border">
+          <a class="border">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
               !Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License -
               https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.
@@ -170,7 +161,7 @@ const removerDoCarrinho = (index) => {
           </a>
         </li>
         <li>
-          <a href="">
+          <a>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
               !Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License -
               https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.
@@ -183,7 +174,7 @@ const removerDoCarrinho = (index) => {
       </ul>
     </nav>
   </header>
-  <div class="home">
+  <div class="home" v-if="!mostraCarrinho">
     <section class="destaques">
       <div>
         <span>Autor de Abril</span>
@@ -260,7 +251,7 @@ const removerDoCarrinho = (index) => {
       </ul>
     </section>
   </div>
-  <section class="carrinho">
+  <section class="carrinho" v-if="mostraCarrinho">
     <h1>Carrinho</h1>
     <div class="topo">
       <h2>Título</h2>
@@ -306,6 +297,33 @@ const removerDoCarrinho = (index) => {
           </div>
         </li>
       </ul>
+      <button class="voltar-home" @click="mostraCarrinho = !mostraCarrinho">
+        Voltar para loja
+      </button>
+    </div>
+    <div class="compra">
+      <div class="cupom">
+        <input type="text" placeholder="Código do cupom">
+        <button>Inserir Cupom</button>
+      </div>
+      <div class="total">
+        <h3>Total da Compra</h3>
+        <ul>
+          <li>
+            <p>Produtos:</p>
+            <p>R${{ precoTotalProdutos.toFixed(2).replace(".", ",") }}</p>
+          </li>
+          <li>
+            <p>Frete:</p>
+            <p>Grátis</p>
+          </li>
+          <li>
+            <p>Total:</p>
+            <p>R${{ precoTotalProdutos.toFixed(2).replace(".", ",") }}</p>
+          </li>
+        </ul>
+        <button>Ir para o pagamento</button>
+      </div>
     </div>
   </section>
   <footer>
@@ -485,7 +503,21 @@ svg {
 button {
   cursor: pointer;
 }
-
+div.home{
+  animation: enter ease-in 0.5s;
+}
+@keyframes enter{
+  from{
+    transform: translateX(-50%);
+    filter: blur(10px);
+    opacity: 0;
+  }
+  to{
+    transform: translateX(0);
+    filter: blur(0);
+    opacity: 1;
+  }
+}
 section.destaques {
   display: flex;
   justify-content: center;
@@ -635,6 +667,7 @@ section.lancamentos ul li button:hover {
 section.carrinho {
   color: #382c2c;
   margin: 8vw 6vw 0 6vw;
+  animation: enter ease-in 0.5s;
 }
 section.carrinho h1 {
   color: #27ae60;
