@@ -251,6 +251,9 @@ const precoTotalProdutos = computed(() => {
       </ul>
     </section>
   </div>
+
+<!--CARRINHO-->
+
   <section class="carrinho" v-if="mostraCarrinho">
     <h1>Carrinho</h1>
     <div class="topo">
@@ -260,13 +263,13 @@ const precoTotalProdutos = computed(() => {
     </div>
     <div class="corpo">
       <ul>
-        <li v-for="(item, index) of carrinho">
+        <li v-for="(item, index) of carrinho" :key="index">
           <div class="produto">
             <img :src="item.capa" :alt="item.titulo" />
-            <div>
+            <div class="descricao">
               <h3>{{ item.titulo }}</h3>
               <p>{{ item.autor }}</p>
-              <span>{{ item.preco }}</span>
+              <span>R${{ item.preco }}</span>
             </div>
           </div>
           <div class="quantidade">
@@ -308,20 +311,18 @@ const precoTotalProdutos = computed(() => {
       </div>
       <div class="total">
         <h3>Total da Compra</h3>
-        <ul>
-          <li>
+          <div>
             <p>Produtos:</p>
             <p>R${{ precoTotalProdutos.toFixed(2).replace(".", ",") }}</p>
-          </li>
-          <li>
+          </div>
+          <div>
             <p>Frete:</p>
             <p>Grátis</p>
-          </li>
-          <li>
+          </div>
+          <div>
             <p>Total:</p>
             <p>R${{ precoTotalProdutos.toFixed(2).replace(".", ",") }}</p>
-          </li>
-        </ul>
+          </div>
         <button>Ir para o pagamento</button>
       </div>
     </div>
@@ -692,7 +693,126 @@ section.carrinho .topo h2:nth-child(2) {
 section.carrinho .corpo ul li {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 0.5vw;
+  padding: 1.5vw;
+  border-bottom: 2px solid #BDBDBD;
+}
+section.carrinho .corpo ul li .produto {
+  display: flex;
+  height: 100%;
+
+}
+section.carrinho .corpo ul li .produto img {
+  width: 120px;
+  height: 70%;
+  border-radius: 3px;
+}
+section.carrinho .corpo ul li .produto .descricao {
+  margin: 0 8.5vw 0 2vw;
+  width: 300px;
+}
+section.carrinho .corpo ul li .produto .descricao h3{
+  color: #382c2c;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+section.carrinho .corpo ul li .produto .descricao p{
+  color: #4f4c57;
+}
+section.carrinho .corpo ul li .produto .descricao span{
+  color: #382c2c;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+section.carrinho .corpo ul li .quantidade {
+  border: 1px solid #000;
+  display: flex;
+  justify-content: space-around;
+  padding: 0.5vw 1.8vw;
+  margin-left: -19.5vw;
+}
+section.carrinho .corpo ul li .quantidade button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+}
+section.carrinho .corpo ul li .quantidade p {
+  font-size: 1.5rem;
+  margin: 0 10px;
+}
+section.carrinho .corpo ul li .subtotal span {
+  color: #382c2c;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-right: 1.5vw;
+}
+section.carrinho .corpo .voltar-home {
+  margin: 2vw 0 5vw 0;
+  padding: 1vw 3vw;
+  background-color: transparent;
+  border: #000 1px solid;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+section.carrinho .compra {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10vw;
+}
+section.carrinho .compra .cupom {
+  display: flex;
+  height: 50%;
+}
+section.carrinho .compra .cupom input {
+  margin-right: 0.8vw;
+  padding: 1vw 3vw 1vw 1vw;
+  background-color: transparent;
+  border: #000 1px solid;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 500;
+  font-weight: normal;
+}
+section.carrinho .compra .cupom button {
+  color: white;
+  font-weight: 500;
+  font-size: 1rem;
+  background-color: #27ae60;
+  border: none;
+  border-radius: 5px;
+  padding: 1vw 3vw;
+}
+section.carrinho .compra .total{
+  border: 2px #000 solid;
+  border-radius: 5px;
+  padding: 2vw 1vw;
+  width: 30%;
+  text-align: center;
+}
+section.carrinho .compra .total h3{
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 0 0 2vw 0;
+}
+section.carrinho .compra .total div{
+  display: flex;
+  justify-content: space-between;
+  border-bottom: solid 1px #000;
+  font-size: 1.5rem;
+  margin-bottom: 1vw;
+  padding-bottom: 1vw;
+}
+section.carrinho .compra .total button{
+  background-color: #27ae60;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  color: #fff;
+  padding: 1vw 4vw;
+  font-size: 1.5rem;
+
 }
 /*======FOOTER======= */
 svg.contatos {
