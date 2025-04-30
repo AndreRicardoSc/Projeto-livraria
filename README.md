@@ -34,6 +34,6 @@ npm run build
 npm run lint
 ```
 # Link projeto web
-```sh
+
 [Livraria Vue Js](https://projeto-livraria-git-main-andrericardoscs-projects.vercel.app)
-```
+
