@@ -9,7 +9,7 @@ const produtos = ref([
     titulo: 'Chain of Iron: Volume 2',
     autor: 'Cassandra Clare',
     preco: 23.24,
-    capa: '/src/assets/imgs/chainofironv2.png',
+    capa: '/public/imgs/livros/chainofironv2.png',
     quantidade: 1,
   },
   {
@@ -17,7 +17,7 @@ const produtos = ref([
     titulo: 'Chain of Thorns',
     autor: 'Cassandra Clare',
     preco: 23.24,
-    capa: '/src/assets/imgs/chainofthorns.png',
+    capa: '/public/imgs/livros/chainofthorns.png',
     quantidade: 1,
   },
   {
@@ -25,7 +25,7 @@ const produtos = ref([
     titulo: 'City of Fallen',
     autor: 'Cassandra Clare',
     preco: 13.94,
-    capa: '/src/assets/imgs/cityoffallenangels.png',
+    capa: '/public/imgs/livros/cityoffallenangels.png',
     quantidade: 1,
   },
   {
@@ -33,7 +33,7 @@ const produtos = ref([
     titulo: 'Nona the Ninth',
     autor: 'Cassandra Clare',
     preco: 16.84,
-    capa: '/src/assets/imgs/nonatheninth.png',
+    capa: '/public/imgs/livros/nonatheninth.png',
     quantidade: 1,
   },
   {
@@ -41,7 +41,7 @@ const produtos = ref([
     titulo: 'Harlem Shuffle',
     autor: 'Colson Whitehead',
     preco: 26.92,
-    capa: '/src/assets/imgs/harlemshuffle.png',
+    capa: '/public/imgs/livros/harlemshuffle.png',
     quantidade: 1,
   },
   {
@@ -49,7 +49,7 @@ const produtos = ref([
     titulo: 'Two Old Women',
     autor: 'Velma Wallis',
     preco: 13.95,
-    capa: '/src/assets/imgs/twooldwomen.png',
+    capa: '/public/imgs/livros/twooldwomen.png',
     quantidade: 1,
   },
   {
@@ -57,7 +57,7 @@ const produtos = ref([
     titulo: 'Carrie Soto Is Back',
     autor: 'Taylor Jenkins Reid',
     preco: 26.04,
-    capa: '/src/assets/imgs/carriesotoisback.png',
+    capa: '/public/imgs/livros/carriesotoisback.png',
     quantidade: 1,
   },
   {
@@ -65,7 +65,7 @@ const produtos = ref([
     titulo: 'Book Lovers',
     autor: 'Emily Henry',
     preco: 15.81,
-    capa: '/src/assets/imgs/booklovers.png',
+    capa: '/public/imgs/livros/booklovers.png',
     quantidade: 1,
   },
 ])
@@ -191,7 +191,7 @@ const precoTotalProdutos = computed(() => {
         </a>
       </div>
       <div>
-        <img src="/src/assets/imgs/Schmitt_Nocognia_3D_500pcx 1.png" alt="livro" />
+        <img src="/public/imgs/livros/Schmitt_Nocognia_3D_500pcx1.png" alt="livro" />
         <p>*within the stock limit</p>
       </div>
     </section>
