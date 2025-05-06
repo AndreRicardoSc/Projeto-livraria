@@ -106,13 +106,15 @@ const precoTotalProdutos = computed(() => {
     </div>
     <div class="busca">
       <input type="text" placeholder="Buscar" />
-      <svg class="lupa" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+      <button>
+        <svg class="lupa" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
         !Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License -
         https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.
-        <path
+          <path
           d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
-        />
+          />
       </svg>
+    </button>
     </div>
     <nav>
       <ul>
@@ -262,7 +264,7 @@ const precoTotalProdutos = computed(() => {
       <h2>Subtotal</h2>
     </div>
     <div class="corpo">
-      <ul>
+      <ul v-if="carrinho.length > 0">
         <li v-for="(item, index) of carrinho" :key="index">
           <div class="produto">
             <img :src="item.capa" :alt="item.titulo" />
@@ -300,6 +302,9 @@ const precoTotalProdutos = computed(() => {
           </div>
         </li>
       </ul>
+      <h3 class="aviso-carrinho" v-else-if="carrinho.length == 0">
+        Não possui nenhum item no carrinho
+      </h3>
       <button class="voltar-home" @click="mostraCarrinho = !mostraCarrinho">
         Voltar para loja
       </button>
@@ -429,8 +434,6 @@ header svg {
   display: flex;
 }
 .lupa {
-  position: absolute;
-  transform: translate(1100%, 50%);
   fill: #231f2d;
 }
 
@@ -458,13 +461,16 @@ header .logo p {
   color: #27ae60;
   padding-left: 10px;
 }
-
+header button{
+  border: none;
+}
 header input {
   border: none;
   border-radius: 0%;
   background-color: #f1f1f1;
   padding: 10px 20px;
-  width: 100%;
+  width: 450px;
+  margin-left: 80px;
   font-size: 1rem;
 }
 
@@ -481,7 +487,9 @@ header ul {
 header .icons {
   align-items: center;
 }
-
+header .icons li a{
+  cursor: pointer;
+}
 header ul li {
   list-style: none;
   margin: 10px 0 10px 20px;
@@ -523,11 +531,11 @@ section.destaques {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2vw 13vw;
+  padding: 2% 10%;
 }
 
 section.destaques div:nth-child(1) {
-  margin: 0 14vw 0 0;
+  margin: 0 10% 0 0;
 }
 
 section.destaques div:nth-child(1) span {
@@ -538,7 +546,7 @@ section.destaques div:nth-child(1) span {
 }
 
 section.destaques div:nth-child(1) h1 {
-  font-size: 3.8rem;
+  font-size: 350%;
   margin: 1.8vw 0;
   font-weight: 700;
   color: #382c2c;
@@ -547,6 +555,7 @@ section.destaques div:nth-child(1) h1 {
 section.destaques div:nth-child(1) p {
   color: #4d4c4c;
   margin: 0 12.5vw 0 0;
+  font-size: 100%;
 }
 
 section.destaques div:nth-child(1) a {
@@ -561,6 +570,7 @@ section.destaques div:nth-child(1) a p {
   width: 35%;
   text-align: center;
   padding: 12px 0;
+  font-size: 100%;
 }
 section.destaques div:nth-child(2) p {
   color: #313131;
@@ -697,6 +707,12 @@ section.carrinho .corpo ul li {
   margin: 0.5vw;
   padding: 1.5vw;
   border-bottom: 2px solid #BDBDBD;
+}
+section.carrinho .corpo h3.aviso-carrinho{
+  text-align: center;
+  margin: 4vw 0;
+  font-size: 200%;
+  font-weight: 500;
 }
 section.carrinho .corpo ul li .produto {
   display: flex;
