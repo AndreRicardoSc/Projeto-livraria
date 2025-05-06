@@ -463,6 +463,8 @@ header .logo p {
 }
 header button{
   border: none;
+  background: #f1f1f1;
+  border-radius: 0%;
 }
 header input {
   border: none;
