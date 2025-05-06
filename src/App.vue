@@ -84,6 +84,13 @@ const adicionarAoCarrinho = (index, id) => {
   if (contemNoCarrinho == 0) {
     carrinho.value.push(produtos.value[index])
   }
+
+  //looping para corrigir o BUG que encontramos
+  for(let elem of carrinho.value){
+    if(elem.quantidade <= 0){
+      elem.quantidade = 1
+    }
+  }
 }
 const removerDoCarrinho = (index) => {
   carrinho.value.splice(index, 1)
