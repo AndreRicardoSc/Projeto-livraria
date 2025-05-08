@@ -2,6 +2,9 @@
 //imports
 import { ref, computed } from 'vue'
 
+//Controle
+const controleDePaginas = ref('home')
+const controleFavoritos = ref(0);
 //produtos - home
 const produtos = ref([
   {
@@ -11,6 +14,7 @@ const produtos = ref([
     preco: 23.24,
     capa: '/public/imgs/livros/chainofironv2.png',
     quantidade: 1,
+    favorito: false,
   },
   {
     id: 2,
@@ -19,6 +23,7 @@ const produtos = ref([
     preco: 23.24,
     capa: '/public/imgs/livros/chainofthorns.png',
     quantidade: 1,
+    favorito: false,
   },
   {
     id: 3,
@@ -27,6 +32,7 @@ const produtos = ref([
     preco: 13.94,
     capa: '/public/imgs/livros/cityoffallenangels.png',
     quantidade: 1,
+    favorito: false,
   },
   {
     id: 4,
@@ -35,6 +41,7 @@ const produtos = ref([
     preco: 16.84,
     capa: '/public/imgs/livros/nonatheninth.png',
     quantidade: 1,
+    favorito: false,
   },
   {
     id: 5,
@@ -43,6 +50,7 @@ const produtos = ref([
     preco: 26.92,
     capa: '/public/imgs/livros/harlemshuffle.png',
     quantidade: 1,
+    favorito: false,
   },
   {
     id: 6,
@@ -51,6 +59,7 @@ const produtos = ref([
     preco: 13.95,
     capa: '/public/imgs/livros/twooldwomen.png',
     quantidade: 1,
+    favorito: false,
   },
   {
     id: 7,
@@ -59,6 +68,7 @@ const produtos = ref([
     preco: 26.04,
     capa: '/public/imgs/livros/carriesotoisback.png',
     quantidade: 1,
+    favorito: false,
   },
   {
     id: 8,
@@ -67,12 +77,12 @@ const produtos = ref([
     preco: 15.81,
     capa: '/public/imgs/livros/booklovers.png',
     quantidade: 1,
+    favorito: false,
   },
 ])
 
 //lógica do carrinho de compras
-const mostraCarrinho = ref(false);
-const carrinho = ref([]);
+const carrinho = ref([])
 const adicionarAoCarrinho = (index, id) => {
   let contemNoCarrinho = 0
   for (let elem of carrinho.value) {
@@ -89,17 +99,17 @@ const removerDoCarrinho = (index) => {
   carrinho.value.splice(index, 1)
 }
 const precoTotalProdutos = computed(() => {
-  let total = 0;
-  for(let item of carrinho.value){
-    total+= (item.quantidade * item.preco);
+  let total = 0
+  for (let item of carrinho.value) {
+    total += item.quantidade * item.preco
   }
   return total
-});
+})
 </script>
 <template>
   <header>
     <div class="logo">
-      <a href="">
+      <a @click="controleDePaginas = 'home'">
         <h1>IFbooks</h1>
         <p>Apreço a leitura</p>
       </a>
@@ -108,13 +118,13 @@ const precoTotalProdutos = computed(() => {
       <input type="text" placeholder="Buscar" />
       <button>
         <svg class="lupa" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-        !Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License -
-        https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.
+          !Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License -
+          https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.
           <path
-          d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
+            d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
           />
-      </svg>
-    </button>
+        </svg>
+      </button>
     </div>
     <nav>
       <ul>
@@ -141,7 +151,18 @@ const precoTotalProdutos = computed(() => {
       </ul>
       <ul class="icons">
         <li>
-          <a class="border" @click="mostraCarrinho = !mostraCarrinho">
+          <a
+            class="border"
+            @click="
+              () => {
+                if (controleDePaginas != 'carrinho') {
+                  controleDePaginas = 'carrinho'
+                } else {
+                  controleDePaginas = 'home'
+                }
+              }
+            "
+          >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
               !Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License -
               https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.
@@ -152,7 +173,18 @@ const precoTotalProdutos = computed(() => {
           </a>
         </li>
         <li>
-          <a class="border">
+          <a
+            class="border"
+            @click="
+              () => {
+                if (controleDePaginas != 'favoritos') {
+                  controleDePaginas = 'favoritos'
+                } else {
+                  controleDePaginas = 'home'
+                }
+              }
+            "
+          >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
               !Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License -
               https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.
@@ -176,7 +208,7 @@ const precoTotalProdutos = computed(() => {
       </ul>
     </nav>
   </header>
-  <div class="home" v-if="!mostraCarrinho">
+  <div class="home" v-if="controleDePaginas == 'home'">
     <section class="destaques">
       <div>
         <span>Autor de Abril</span>
@@ -238,6 +270,34 @@ const precoTotalProdutos = computed(() => {
           <p class="autor">{{ item.autor }}</p>
           <div class="info">
             <p>R${{ item.preco }}</p>
+
+            <!--coração desfavoritado-->
+            <svg
+              @click="item.favorito = !item.favorito; controleFavoritos++"
+              v-if="item.favorito == false"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+            >
+              !Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License -
+              https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.
+              <path
+                d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8l0-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5l0 3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20-.1-.1s0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5l0 3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2l0-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z"
+              />
+            </svg>
+
+            <!--coração favoritado-->
+            <svg
+              @click="item.favorito = !item.favorito; controleFavoritos--"
+              v-if="item.favorito == true"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+            >
+              !Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License -
+              https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.
+              <path
+                d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"
+              />
+            </svg>
           </div>
           <button @click="adicionarAoCarrinho(index, item.id)">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
@@ -254,9 +314,9 @@ const precoTotalProdutos = computed(() => {
     </section>
   </div>
 
-<!--CARRINHO-->
+  <!--CARRINHO-->
 
-  <section class="carrinho" v-if="mostraCarrinho">
+  <section class="carrinho" v-if="controleDePaginas == 'carrinho'">
     <h1>Carrinho</h1>
     <div class="topo">
       <h2>Título</h2>
@@ -279,10 +339,11 @@ const precoTotalProdutos = computed(() => {
               @click="
                 () => {
                   item.quantidade--
-                  if(item.quantidade == 0){
-                    removerDoCarrinho(index);
+                  if (item.quantidade == 0) {
+                    removerDoCarrinho(index)
                   }
-                }"
+                }
+              "
             >
               -
             </button>
@@ -305,32 +366,93 @@ const precoTotalProdutos = computed(() => {
       <h3 class="aviso-carrinho" v-else-if="carrinho.length == 0">
         Não possui nenhum item no carrinho
       </h3>
-      <button class="voltar-home" @click="mostraCarrinho = !mostraCarrinho">
+      <button class="voltar-home" @click="controleDePaginas = 'home'">
         Voltar para loja
       </button>
     </div>
     <div class="compra">
       <div class="cupom">
-        <input type="text" placeholder="Código do cupom">
+        <input type="text" placeholder="Código do cupom" />
         <button>Inserir Cupom</button>
       </div>
       <div class="total">
         <h3>Total da Compra</h3>
-          <div>
-            <p>Produtos:</p>
-            <p>R${{ precoTotalProdutos.toFixed(2).replace(".", ",") }}</p>
-          </div>
-          <div>
-            <p>Frete:</p>
-            <p>Grátis</p>
-          </div>
-          <div>
-            <p>Total:</p>
-            <p>R${{ precoTotalProdutos.toFixed(2).replace(".", ",") }}</p>
-          </div>
+        <div>
+          <p>Produtos:</p>
+          <p>R${{ precoTotalProdutos.toFixed(2).replace('.', ',') }}</p>
+        </div>
+        <div>
+          <p>Frete:</p>
+          <p>Grátis</p>
+        </div>
+        <div>
+          <p>Total:</p>
+          <p>R${{ precoTotalProdutos.toFixed(2).replace('.', ',') }}</p>
+        </div>
         <button>Ir para o pagamento</button>
       </div>
     </div>
+  </section>
+
+  <!--Favoritos-->
+  <section class="favoritos" v-if="controleDePaginas == 'favoritos'">
+    <h1>Favoritos</h1>
+    <ul v-if="controleFavoritos > 0">
+      <li v-for="(item, index) of produtos" :key="index">
+        <div v-if="item.favorito == true">
+        <div>
+          <img :src="item.capa" :alt="item.titulo" />
+          <h3>{{ item.titulo }}</h3>
+          <p class="autor">{{ item.autor }}</p>
+        </div>
+          <div class="info">
+            <p>R${{ item.preco }}</p>
+
+            <!--coração desfavoritado-->
+            <svg
+              @click="item.favorito = !item.favorito; controleFavoritos++"
+              v-if="item.favorito == false"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+            >
+              !Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License -
+              https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.
+              <path
+                d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8l0-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5l0 3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20-.1-.1s0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5l0 3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2l0-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z"
+              />
+            </svg>
+
+            <!--coração favoritado-->
+            <svg
+              @click="item.favorito = !item.favorito; controleFavoritos--"
+              v-if="item.favorito == true"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+            >
+              !Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License -
+              https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.
+              <path
+                d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"
+              />
+            </svg>
+          </div>
+          <button @click="adicionarAoCarrinho(index, item.id)">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+              !Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License -
+              https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.
+              <path
+                d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"
+              />
+            </svg>
+            Comprar
+          </button>
+        </div>
+      </li>
+    </ul>
+    <h3 class="aviso-favoritos" v-if="controleFavoritos == 0">Nenhum item favoritado</h3>
+    <button class="voltar-home" @click="controleDePaginas = 'home'">
+        Voltar para loja
+    </button>
   </section>
   <footer>
     <div class="contatos">
@@ -448,6 +570,7 @@ header {
 header .logo a {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 header .logo h1 {
@@ -461,7 +584,7 @@ header .logo p {
   color: #27ae60;
   padding-left: 10px;
 }
-header button{
+header button {
   border: none;
   background: #f1f1f1;
   border-radius: 0%;
@@ -489,7 +612,7 @@ header ul {
 header .icons {
   align-items: center;
 }
-header .icons li a{
+header .icons li a {
   cursor: pointer;
 }
 header ul li {
@@ -514,16 +637,16 @@ svg {
 button {
   cursor: pointer;
 }
-div.home{
+div.home {
   animation: enter ease-in 0.5s;
 }
-@keyframes enter{
-  from{
+@keyframes enter {
+  from {
     transform: translateX(-50%);
     filter: blur(10px);
     opacity: 0;
   }
-  to{
+  to {
     transform: translateX(0);
     filter: blur(0);
     opacity: 1;
@@ -654,11 +777,18 @@ section.lancamentos ul li p {
 section.lancamentos ul li p.autor {
   color: #4f4c57;
 }
-
+section.lancamentos ul li div.info {
+  display: flex;
+  justify-content: space-between;
+}
 section.lancamentos ul li div.info p {
   font-size: 130%;
 }
-
+section.lancamentos ul li div.info svg {
+  fill: #27ae60;
+  width: 25px;
+  cursor: pointer;
+}
 section.lancamentos ul li div.button {
   background-color: #000;
 }
@@ -671,10 +801,6 @@ section.lancamentos ul li button {
   border-radius: 2px;
   border: none;
   font-size: 120%;
-}
-
-section.lancamentos ul li button:hover {
-  background: #27ae60;
 }
 /*======CARRINHO======= */
 section.carrinho {
@@ -708,9 +834,9 @@ section.carrinho .corpo ul li {
   align-items: center;
   margin: 0.5vw;
   padding: 1.5vw;
-  border-bottom: 2px solid #BDBDBD;
+  border-bottom: 2px solid #bdbdbd;
 }
-section.carrinho .corpo h3.aviso-carrinho{
+section.carrinho .corpo h3.aviso-carrinho {
   text-align: center;
   margin: 4vw 0;
   font-size: 200%;
@@ -719,7 +845,6 @@ section.carrinho .corpo h3.aviso-carrinho{
 section.carrinho .corpo ul li .produto {
   display: flex;
   height: 100%;
-
 }
 section.carrinho .corpo ul li .produto img {
   width: 120px;
@@ -730,15 +855,15 @@ section.carrinho .corpo ul li .produto .descricao {
   margin: 0 8.5vw 0 2vw;
   width: 300px;
 }
-section.carrinho .corpo ul li .produto .descricao h3{
+section.carrinho .corpo ul li .produto .descricao h3 {
   color: #382c2c;
   font-size: 1.5rem;
   font-weight: 500;
 }
-section.carrinho .corpo ul li .produto .descricao p{
+section.carrinho .corpo ul li .produto .descricao p {
   color: #4f4c57;
 }
-section.carrinho .corpo ul li .produto .descricao span{
+section.carrinho .corpo ul li .produto .descricao span {
   color: #382c2c;
   font-size: 1.5rem;
   font-weight: 500;
@@ -802,19 +927,19 @@ section.carrinho .compra .cupom button {
   border-radius: 5px;
   padding: 1vw 3vw;
 }
-section.carrinho .compra .total{
+section.carrinho .compra .total {
   border: 2px #000 solid;
   border-radius: 5px;
   padding: 2vw 1vw;
   width: 30%;
   text-align: center;
 }
-section.carrinho .compra .total h3{
+section.carrinho .compra .total h3 {
   font-size: 1.5rem;
   font-weight: 500;
   margin: 0 0 2vw 0;
 }
-section.carrinho .compra .total div{
+section.carrinho .compra .total div {
   display: flex;
   justify-content: space-between;
   border-bottom: solid 1px #000;
@@ -822,7 +947,7 @@ section.carrinho .compra .total div{
   margin-bottom: 1vw;
   padding-bottom: 1vw;
 }
-section.carrinho .compra .total button{
+section.carrinho .compra .total button {
   background-color: #27ae60;
   border: none;
   border-radius: 5px;
@@ -830,7 +955,67 @@ section.carrinho .compra .total button{
   color: #fff;
   padding: 1vw 4vw;
   font-size: 1.5rem;
-
+}
+/*=======FAVORITOS=======*/
+section.favoritos{
+  margin: 8vw 4vw;
+  animation: enter ease-in 0.5s;
+}
+section.favoritos h1{
+  color: #27ae60;
+  font-size: 2.5rem;
+  margin-bottom: 2vw;
+  font-weight: 500;
+}
+section.favoritos ul{
+  display: flex;
+  flex-wrap: wrap;
+}
+section.favoritos ul li{
+  margin: 1vw 2vw;
+  width: 20%;
+}
+section.favoritos ul li div img{
+  width: 100%;
+}
+section.favoritos ul li div p.autor{
+  color: #4d4c4c;
+  margin: 1vw 0;
+}
+section.favoritos ul li div div.info{
+  display: flex;
+  justify-content: space-between;
+}
+section.favoritos ul li div div.info p{
+  font-size: 130%;
+}
+section.favoritos ul li div div.info svg{
+  fill: #27ae60;
+  width: 25px;
+  cursor: pointer;
+}
+section.favoritos ul li div button {
+  width: 100%;
+  background: #27ae60;
+  color: #fff;
+  padding: 10px 0;
+  border-radius: 2px;
+  border: none;
+  font-size: 120%;
+  margin-top: 1vw;
+}
+section.favoritos h3.aviso-favoritos{
+  text-align: center;
+  font-size: 2rem;
+}
+section.favoritos button.voltar-home{
+  margin: 2vw 0 0 0;
+  padding: 1vw 3vw;
+  background-color: transparent;
+  border: #000 1px solid;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 500;
 }
 /*======FOOTER======= */
 svg.contatos {
