@@ -12,7 +12,7 @@ const produtos = ref([
     titulo: 'Chain of Iron: Volume 2',
     autor: 'Cassandra Clare',
     preco: 23.24,
-    capa: '/public/imgs/livros/chainofironv2.png',
+    capa: '/imgs/livros/chainofironv2.png',
     quantidade: 1,
     favorito: false,
   },
@@ -21,7 +21,7 @@ const produtos = ref([
     titulo: 'Chain of Thorns',
     autor: 'Cassandra Clare',
     preco: 23.24,
-    capa: '/public/imgs/livros/chainofthorns.png',
+    capa: '/imgs/livros/chainofthorns.png',
     quantidade: 1,
     favorito: false,
   },
@@ -30,7 +30,7 @@ const produtos = ref([
     titulo: 'City of Fallen',
     autor: 'Cassandra Clare',
     preco: 13.94,
-    capa: '/public/imgs/livros/cityoffallenangels.png',
+    capa: '/imgs/livros/cityoffallenangels.png',
     quantidade: 1,
     favorito: false,
   },
@@ -39,7 +39,7 @@ const produtos = ref([
     titulo: 'Nona the Ninth',
     autor: 'Cassandra Clare',
     preco: 16.84,
-    capa: '/public/imgs/livros/nonatheninth.png',
+    capa: '/imgs/livros/nonatheninth.png',
     quantidade: 1,
     favorito: false,
   },
@@ -48,7 +48,7 @@ const produtos = ref([
     titulo: 'Harlem Shuffle',
     autor: 'Colson Whitehead',
     preco: 26.92,
-    capa: '/public/imgs/livros/harlemshuffle.png',
+    capa: '/imgs/livros/harlemshuffle.png',
     quantidade: 1,
     favorito: false,
   },
@@ -57,7 +57,7 @@ const produtos = ref([
     titulo: 'Two Old Women',
     autor: 'Velma Wallis',
     preco: 13.95,
-    capa: '/public/imgs/livros/twooldwomen.png',
+    capa: '/imgs/livros/twooldwomen.png',
     quantidade: 1,
     favorito: false,
   },
@@ -66,7 +66,7 @@ const produtos = ref([
     titulo: 'Carrie Soto Is Back',
     autor: 'Taylor Jenkins Reid',
     preco: 26.04,
-    capa: '/public/imgs/livros/carriesotoisback.png',
+    capa: '/imgs/livros/carriesotoisback.png',
     quantidade: 1,
     favorito: false,
   },
@@ -75,7 +75,7 @@ const produtos = ref([
     titulo: 'Book Lovers',
     autor: 'Emily Henry',
     preco: 15.81,
-    capa: '/public/imgs/livros/booklovers.png',
+    capa: '/imgs/livros/booklovers.png',
     quantidade: 1,
     favorito: false,
   },
@@ -105,6 +105,14 @@ const precoTotalProdutos = computed(() => {
   }
   return total
 })
+//lógica favoritos
+const favoritos = ref([]);
+const adicionarFavorito = (index) => {
+  favoritos.value.push(produtos.value[index])
+}
+const removerFavorito = (index) => {
+  favoritos.value.splice(index, 1)
+}
 </script>
 <template>
   <header>
@@ -273,7 +281,7 @@ const precoTotalProdutos = computed(() => {
 
             <!--coração desfavoritado-->
             <svg
-              @click="item.favorito = !item.favorito; controleFavoritos++"
+              @click="adicionarFavorito(index); item.favorito = !item.favorito; controleFavoritos++"
               v-if="item.favorito == false"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 512 512"
@@ -287,7 +295,7 @@ const precoTotalProdutos = computed(() => {
 
             <!--coração favoritado-->
             <svg
-              @click="item.favorito = !item.favorito; controleFavoritos--"
+              @click="removerFavorito(index);item.favorito = !item.favorito; controleFavoritos--"
               v-if="item.favorito == true"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 512 512"
@@ -398,8 +406,7 @@ const precoTotalProdutos = computed(() => {
   <section class="favoritos" v-if="controleDePaginas == 'favoritos'">
     <h1>Favoritos</h1>
     <ul v-if="controleFavoritos > 0">
-      <li v-for="(item, index) of produtos" :key="index">
-        <div v-if="item.favorito == true">
+      <li v-for="(item, index) of favoritos" :key="index">
         <div>
           <img :src="item.capa" :alt="item.titulo" />
           <h3>{{ item.titulo }}</h3>
@@ -424,7 +431,7 @@ const precoTotalProdutos = computed(() => {
 
             <!--coração favoritado-->
             <svg
-              @click="item.favorito = !item.favorito; controleFavoritos--"
+              @click="removerFavorito(index); item.favorito = !item.favorito; controleFavoritos--"
               v-if="item.favorito == true"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 512 512"
@@ -446,7 +453,6 @@ const precoTotalProdutos = computed(() => {
             </svg>
             Comprar
           </button>
-        </div>
       </li>
     </ul>
     <h3 class="aviso-favoritos" v-if="controleFavoritos == 0">Nenhum item favoritado</h3>
@@ -975,26 +981,26 @@ section.favoritos ul li{
   margin: 1vw 2vw;
   width: 20%;
 }
-section.favoritos ul li div img{
+section.favoritos ul li  img{
   width: 100%;
 }
-section.favoritos ul li div p.autor{
+section.favoritos ul li  p.autor{
   color: #4d4c4c;
   margin: 1vw 0;
 }
-section.favoritos ul li div div.info{
+section.favoritos ul li div.info{
   display: flex;
   justify-content: space-between;
 }
-section.favoritos ul li div div.info p{
+section.favoritos ul li div.info p{
   font-size: 130%;
 }
-section.favoritos ul li div div.info svg{
+section.favoritos ul li div.info svg{
   fill: #27ae60;
   width: 25px;
   cursor: pointer;
 }
-section.favoritos ul li div button {
+section.favoritos ul li button {
   width: 100%;
   background: #27ae60;
   color: #fff;
