@@ -117,8 +117,16 @@ const favoritos = ref([]);
 const adicionarFavorito = (index) => {
   favoritos.value.push(produtos.value[index])
 }
-const removerFavorito = (index) => {
-  favoritos.value.splice(index, 1)
+const removerFavorito = (id) => {
+  let item = {};
+  let value = 0;
+  for(let element of favoritos.value){
+    if(element.id == id){
+      item = element;
+      value = favoritos.value.indexOf(item);
+    }
+  }
+  favoritos.value.splice(value, 1);
 }
 </script>
 <template>
@@ -302,7 +310,7 @@ const removerFavorito = (index) => {
 
             <!--coração favoritado-->
             <svg
-              @click="removerFavorito(index);item.favorito = !item.favorito; controleFavoritos--"
+              @click="removerFavorito(item.id);item.favorito = !item.favorito; controleFavoritos--"
               v-if="item.favorito == true"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 512 512"
@@ -438,7 +446,7 @@ const removerFavorito = (index) => {
 
             <!--coração favoritado-->
             <svg
-              @click="removerFavorito(index); item.favorito = !item.favorito; controleFavoritos--"
+              @click="removerFavorito(item.id); item.favorito = !item.favorito; controleFavoritos--"
               v-if="item.favorito == true"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 512 512"
