@@ -35,5 +35,5 @@ npm run lint
 ```
 # Link projeto web
 
-[Livraria Vue Js](https://projeto-livraria-eight.vercel.app/)
+[Livraria Vue Js](https://projeto-livraria-pied.vercel.app/)
 
