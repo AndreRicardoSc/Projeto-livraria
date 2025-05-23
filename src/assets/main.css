@@ -6,3 +6,15 @@ body{
 a {
   text-decoration: none;
 }
+svg {
+  width: 20px;
+  fill: #fff;
+}
+ul,
+ol,
+li {
+  list-style: none;
+}
+button {
+  cursor: pointer;
+}
